@@ -4,6 +4,7 @@ import type React from "react";
 
 import { BillProvider } from "@/app/providers/bill-provider";
 import { ThemeProvider } from "@/app/providers/theme-provider";
+import ThemeToggle from "@/components/theme-toggle";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
@@ -24,10 +25,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider>
+        <ThemeProvider
+          attribute={"class"}
+          defaultTheme="dark"
+          enableColorScheme
+        >
           <BillProvider>
+            <div className="absolute top-4 right-4">
+              <ThemeToggle />
+            </div>
             <main>{children}</main>
             <Toaster />
           </BillProvider>
