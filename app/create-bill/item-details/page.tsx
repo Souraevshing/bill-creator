@@ -16,12 +16,15 @@ export default function ItemDetails() {
 
   const { billData, editItem } = useBillContext();
 
-  const currentItemIndex = billData.items.length - 1;
-  const currentItem = billData.items[currentItemIndex];
+  const currentItemIndex = billData?.items?.length
+    ? billData.items.length - 1
+    : -1;
+  const currentItem = billData?.items?.[currentItemIndex] ?? {};
 
-  const [description, setDescription] = useState(currentItem.description);
-  const [briefs, setBriefs] = useState(currentItem.briefs);
-  const [measurement, setMeasurement] = useState(currentItem.measurement);
+  const [description, setDescription] = useState(currentItem.description || "");
+  const [briefs, setBriefs] = useState(currentItem.briefs || "");
+  const [measurement, setMeasurement] = useState(currentItem.measurement || "");
+
   const [isLoading, setIsLoading] = useState(false);
 
   const handleNext = () => {
